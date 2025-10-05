@@ -4,8 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.haddaji.httpserver.util.json;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 
 public class ConfigurationManager {
@@ -16,7 +14,6 @@ public class ConfigurationManager {
 
     }
 
-
     public static ConfigurationManager getInstance() {
         if (myConfigurationManager == null) {
             myConfigurationManager = new ConfigurationManager();
@@ -26,32 +23,24 @@ public class ConfigurationManager {
 
     //used to load configuration file by the path provided
     public void loadConfigurationFile(String filePath)  {
-        FileReader filereader = null;
+        final String content;
         try {
-            filereader = new FileReader(filePath);
-        } catch (FileNotFoundException e) {
-            throw new HttpConfigurationException(e);
-        }
-        StringBuilder sb = new StringBuilder();
-        int i;
-        try {
-            while ((i = filereader.read()) != -1) {
-                sb.append((char) i);
-            }
+            content = java.nio.file.Files.readString(java.nio.file.Path.of(filePath));
         } catch (IOException e) {
             throw new HttpConfigurationException(e);
         }
 
-        JsonNode conf = null;
+        final JsonNode conf;
         try {
-            conf = json.parse(sb.toString());
+            conf = json.parse(content);
         } catch (IOException e) {
             throw new HttpConfigurationException("error parsing configuration file", e);
         }
+
         try {
             myCurrentConfiguration = json.fromJson(conf, Configuration.class);
         } catch (JsonProcessingException e) {
-            throw new HttpConfigurationException("error parsing configuration file , internal",e);
+            throw new HttpConfigurationException("error parsing configuration file, internal", e);
         }
     }
     //used to get the current configuration
