@@ -20,7 +20,8 @@ class HttpParserTest {
 
     @Test
     void parseHttpRequest() {
-        httpParser.parseHttpRequest(generateValidTestCase());
+        HttpRequest request =  httpParser.parseHttpRequest(generateValidTestCase());
+        assertEquals(request.getMethod() , HttpMethod.GET);
     }
 
     private InputStream generateValidTestCase(){
