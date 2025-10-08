@@ -51,10 +51,13 @@ public class HttpParser {
                 _byte = reader.read();
                 if (_byte == LF) {
                     LOGGER.debug("request line version to process: {}", processingDataBuffer.toString());
-                    if(!methodParsed || !requestTargetParsed){
+                    if(!methodParsed || !requestTargetParsed || processingDataBuffer.isEmpty()){
                         throw new HttpParsingException(HttpStatusCode.CLIENT_ERROR_400_BAD_REQUEST , "Bad Request");
                     }
                     return;
+                }
+                else{
+                    throw new HttpParsingException(HttpStatusCode.CLIENT_ERROR_400_BAD_REQUEST , "Bad Request");
                 }
 
             }
@@ -65,6 +68,7 @@ public class HttpParser {
                     methodParsed = true;
                 }else if(!requestTargetParsed){
                     LOGGER.debug("request line target to process: {}", processingDataBuffer.toString());
+                    request.setRequestTarget(processingDataBuffer.toString());
                     requestTargetParsed = true;
                 }
                 else{

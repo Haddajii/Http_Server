@@ -21,7 +21,9 @@ class HttpParserTest {
     @Test
     void parseHttpRequest() throws HttpParsingException {
         HttpRequest request =  httpParser.parseHttpRequest(generateValidTestCase());
+        assertNotNull(request);
         assertEquals(request.getMethod() , HttpMethod.GET);
+        assertEquals(request.getRequestTarget() , "/");
     }
         @Test
         void parseHttpRequestBadMethod() {
@@ -32,6 +34,30 @@ class HttpParserTest {
                 assertEquals(HttpStatusCode.SERVER_ERROR_501_NOT_IMPLEMENTED, e.getErrorCode());
             }
         }
+
+    @Test
+    void parseHttpRequestInvalidRequestLine() {
+        try {
+            httpParser.parseHttpRequest(generateInvalidRequestLine());
+            fail("HttpParsingException was not thrown");
+        } catch (HttpParsingException e) {
+            assertEquals(HttpStatusCode.CLIENT_ERROR_400_BAD_REQUEST, e.getErrorCode());
+        }
+    }
+
+    @Test
+    void parseHttpRequestEmptyRequestTarget() {
+        String rawData = "GET  HTTP/1.1\r\n" +
+                "Host: localhost:8080\r\n" +
+                "\r\n";
+        InputStream is = new java.io.ByteArrayInputStream(rawData.getBytes(StandardCharsets.US_ASCII));
+        try {
+            httpParser.parseHttpRequest(is);
+            fail("HttpParsingException was not thrown");
+        } catch (HttpParsingException e) {
+            assertEquals(HttpStatusCode.SERVER_ERROR_500_INTERNAL_SERVER_ERROR, e.getErrorCode());
+        }
+    }
 
 
         private InputStream generateBadTestCaseMethod() {

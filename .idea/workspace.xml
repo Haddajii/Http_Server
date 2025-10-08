@@ -7,6 +7,7 @@
     <list default="true" id="fb7c855d-7bd8-46d1-9d9a-efc747ea21b7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/haddaji/httpserver/http/HttpParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/haddaji/httpserver/http/HttpParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/haddaji/httpserver/http/HttpRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/haddaji/httpserver/http/HttpRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/haddaji/httpserver/http/HttpParserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/haddaji/httpserver/http/HttpParserTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -115,7 +116,8 @@
       <workItem from="1759745287722" duration="7814000" />
       <workItem from="1759785461703" duration="4038000" />
       <workItem from="1759868601218" duration="4249000" />
-      <workItem from="1759927705627" duration="8216000" />
+      <workItem from="1759927705627" duration="8315000" />
+      <workItem from="1759963959299" duration="1975000" />
     </task>
     <servers />
   </component>
