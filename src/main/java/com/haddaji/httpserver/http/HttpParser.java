@@ -56,6 +56,7 @@ public class HttpParser {
                     }
                     return;
                 }
+
             }
             if(_byte == sp){
                 if(!methodParsed){
