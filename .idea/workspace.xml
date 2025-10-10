@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb7c855d-7bd8-46d1-9d9a-efc747ea21b7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/haddaji/httpserver/http/BadHttpVersionException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/haddaji/httpserver/http/HttpVersion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/haddaji/httpserver/http/HttpVersionTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/haddaji/httpserver/http/HttpParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/haddaji/httpserver/http/HttpParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/haddaji/httpserver/http/HttpRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/haddaji/httpserver/http/HttpRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/haddaji/httpserver/http/HttpStatusCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/haddaji/httpserver/http/HttpStatusCode.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +39,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.HttpServer.executor": "Run",
+    "JUnit.All Tests.executor": "Run",
     "JUnit.HttpParserTest.executor": "Run",
     "JUnit.HttpVersionTest.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -67,10 +68,23 @@
       <recent name="com.haddaji.httpserver.http" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.HttpVersionTest">
+  <component name="RunManager" selected="JUnit.All Tests">
     <configuration name="HttpServer" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.haddaji.httpserver.HttpServer" />
       <module name="Http_Server" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All Tests" type="JUnit" factoryName="JUnit">
+      <module name="Http_Server" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="wholeProject" />
+      </option>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -100,11 +114,18 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.haddaji.httpserver.http" />
       <option name="MAIN_CLASS_NAME" value="com.haddaji.httpserver.http.HttpVersionTest" />
+      <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.HttpServer" />
+      <item itemvalue="JUnit.All Tests" />
+      <item itemvalue="JUnit.HttpParserTest" />
+      <item itemvalue="JUnit.HttpVersionTest" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.HttpVersionTest" />
@@ -135,7 +156,8 @@
       <workItem from="1759868601218" duration="4249000" />
       <workItem from="1759927705627" duration="8315000" />
       <workItem from="1759963959299" duration="2320000" />
-      <workItem from="1760043290441" duration="5471000" />
+      <workItem from="1760043290441" duration="5673000" />
+      <workItem from="1760129539773" duration="3620000" />
     </task>
     <servers />
   </component>

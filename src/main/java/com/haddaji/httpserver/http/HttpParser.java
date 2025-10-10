@@ -54,6 +54,12 @@ public class HttpParser {
                     if(!methodParsed || !requestTargetParsed || processingDataBuffer.isEmpty()){
                         throw new HttpParsingException(HttpStatusCode.CLIENT_ERROR_400_BAD_REQUEST , "Bad Request");
                     }
+                    try {
+                        request.setHttpVersion(processingDataBuffer.toString());
+                    } catch (BadHttpVersionException e) {
+                        throw new HttpParsingException(HttpStatusCode.CLIENT_ERROR_400_BAD_REQUEST , "Bad Request");
+                    }
+
                     return;
                 }
                 else{

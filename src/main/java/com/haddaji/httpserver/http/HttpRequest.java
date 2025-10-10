@@ -3,7 +3,8 @@ package com.haddaji.httpserver.http;
 public class HttpRequest extends HttpMessage{
     private HttpMethod method;
     private String requestTarget;
-    private String httpVersion;
+    private String originalHttpVersion;
+    private HttpVersion bestCompatibleHttpVersion;
 
     HttpRequest(){
     }
@@ -14,6 +15,13 @@ public class HttpRequest extends HttpMessage{
 
     public String getRequestTarget() {
         return requestTarget;
+    }
+    public String getOriginalHttpVersion() {
+        return originalHttpVersion;
+    }
+
+    public HttpVersion getBestCompatibleHttpVersion() {
+        return bestCompatibleHttpVersion;
     }
 
     void setMethod(String method) throws HttpParsingException {
@@ -32,4 +40,13 @@ public class HttpRequest extends HttpMessage{
         }
         this.requestTarget = requestTarget;
     }
+
+    void setHttpVersion(String originalHttpVersion) throws BadHttpVersionException, HttpParsingException {
+        this.originalHttpVersion = originalHttpVersion;
+        this.bestCompatibleHttpVersion = HttpVersion.getBestCompatibleVersion(originalHttpVersion);
+        if(this.bestCompatibleHttpVersion == null){
+            throw new HttpParsingException(HttpStatusCode.SERVER_ERROR_505_HTTP_VERSION_NOT_SUPPORTED , "HTTP Version Not Supported");
+        }
+    }
 }
+
