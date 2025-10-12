@@ -1,10 +1,13 @@
 package com.haddaji.httpserver.http;
 
+import java.util.HashMap;
+
 public class HttpRequest extends HttpMessage{
     private HttpMethod method;
     private String requestTarget;
     private String originalHttpVersion;
     private HttpVersion bestCompatibleHttpVersion;
+    private HashMap<String, String> headers = new HashMap<>();
 
     HttpRequest(){
     }
@@ -22,6 +25,9 @@ public class HttpRequest extends HttpMessage{
 
     public HttpVersion getBestCompatibleHttpVersion() {
         return bestCompatibleHttpVersion;
+    }
+    public String getHeader(String fieldName) {
+        return headers.get(fieldName.toLowerCase());
     }
 
     void setMethod(String method) throws HttpParsingException {
@@ -47,6 +53,10 @@ public class HttpRequest extends HttpMessage{
         if(this.bestCompatibleHttpVersion == null){
             throw new HttpParsingException(HttpStatusCode.SERVER_ERROR_505_HTTP_VERSION_NOT_SUPPORTED , "HTTP Version Not Supported");
         }
+    }
+
+    void addHeader(String fieldName, String fieldValue) {
+        headers.put(fieldName.toLowerCase(), fieldValue);
     }
 }
 
