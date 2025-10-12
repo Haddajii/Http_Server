@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb7c855d-7bd8-46d1-9d9a-efc747ea21b7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/haddaji/httpserver/http/HttpHeadersParserTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/haddaji/httpserver/core/io/WebRootHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/haddaji/httpserver/core/io/WebRootNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webRoot/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/haddaji/httpserver/http/HttpParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/haddaji/httpserver/http/HttpParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/haddaji/httpserver/http/HttpRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/haddaji/httpserver/http/HttpRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/haddaji/httpserver/core/HttpConnectionWorkerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/haddaji/httpserver/core/HttpConnectionWorkerThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/http.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/http.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +31,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -61,6 +69,9 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.haddaji.httpserver.core.io" />
+    </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
@@ -68,7 +79,7 @@
       <recent name="com.haddaji.httpserver.http" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All Tests">
+  <component name="RunManager" selected="Application.HttpServer">
     <configuration name="HttpServer" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.haddaji.httpserver.HttpServer" />
       <module name="Http_Server" />
@@ -158,7 +169,7 @@
       <workItem from="1759963959299" duration="2320000" />
       <workItem from="1760043290441" duration="5673000" />
       <workItem from="1760129539773" duration="4354000" />
-      <workItem from="1760277770192" duration="3449000" />
+      <workItem from="1760277770192" duration="15727000" />
     </task>
     <servers />
   </component>

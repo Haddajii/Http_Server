@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Haddaji's HTTP Server</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --bg-1: #0f1724;
+            --bg-2: #071032;
+            --accent-a: #7c3aed;
+            --accent-b: #06b6d4;
+            --muted: rgba(255,255,255,0.65);
+            --glass: rgba(255,255,255,0.06);
+            --glass-strong: rgba(255,255,255,0.08);
+            --radius: 14px;
+            --maxw: 1100px;
+            --mono: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+
+        *{box-sizing: border-box}
+        html,body{height:100%}
+        body{
+            margin:0;
+            font-family: var(--mono);
+            background: radial-gradient(1200px 600px at 10% 10%, rgba(124,58,237,0.14), transparent 6%),
+            radial-gradient(1000px 500px at 90% 90%, rgba(6,182,212,0.12), transparent 6%),
+            linear-gradient(180deg, var(--bg-1), var(--bg-2));
+            color: #fff;
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:40px;
+        }
+
+        .card{
+            width:100%;
+            max-width:var(--maxw);
+            background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+            border-radius: var(--radius);
+            padding: clamp(20px, 3.5vw, 34px);
+            box-shadow: 0 10px 30px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+            backdrop-filter: blur(6px) saturate(1.05);
+            border: 1px solid rgba(255,255,255,0.03);
+            overflow: hidden;
+        }
+
+        header {
+            display:flex;
+            gap:16px;
+            align-items:center;
+            margin-bottom:18px;
+        }
+
+        .logo {
+            width:60px;
+            height:60px;
+            border-radius:12px;
+            display:grid;
+            place-items:center;
+            background: linear-gradient(135deg,var(--accent-a), var(--accent-b));
+            box-shadow: 0 6px 18px rgba(12,11,33,0.45);
+            font-weight:800;
+            font-size:20px;
+            color:white;
+            transform: translateZ(0);
+        }
+
+        h1{margin:0;font-size: clamp(20px, 2.6vw, 32px); font-weight:700; letter-spacing:-0.02em}
+        p.lead{margin:6px 0 0;color:var(--muted); font-size:14px}
+
+        .grid{
+            display:grid;
+            grid-template-columns: 1fr 380px;
+            gap:22px;
+            margin-top:20px;
+        }
+
+        .hero{
+            padding:18px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+            border-radius:12px;
+            border: 1px solid rgba(255,255,255,0.02);
+        }
+
+        .cta-row{
+            margin-top:18px;
+            display:flex;
+            gap:12px;
+            flex-wrap:wrap;
+        }
+
+        .btn{
+            appearance:none;
+            border:0;
+            padding:10px 14px;
+            border-radius:10px;
+            cursor:pointer;
+            font-weight:600;
+            font-size:14px;
+            color:white;
+            background: linear-gradient(90deg,var(--accent-a), var(--accent-b));
+            box-shadow: 0 8px 24px rgba(12,11,33,0.45);
+        }
+
+        .btn.ghost{
+            background:transparent;
+            border:1px solid rgba(255,255,255,0.06);
+            color:var(--muted);
+            box-shadow:none;
+        }
+
+        .card-aside{
+            padding:18px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+            border-radius:12px;
+            border: 1px solid rgba(255,255,255,0.02);
+            height:100%;
+        }
+
+        .meta{
+            display:flex;
+            gap:12px;
+            align-items:center;
+            margin-bottom:12px;
+            color:var(--muted);
+            font-size:13px;
+        }
+
+        .stat{
+            display:flex;
+            flex-direction:column;
+            gap:4px;
+        }
+        .stat .n{font-weight:700; font-size:18px}
+        .stat .t{color:var(--muted); font-size:12px}
+
+        .features{
+            display:grid;
+            grid-template-columns: repeat(2, minmax(0,1fr));
+            gap:12px;
+            margin-top:16px;
+        }
+
+        .feature{
+            padding:12px;
+            border-radius:10px;
+            background: var(--glass);
+            border:1px solid rgba(255,255,255,0.02);
+            color:var(--muted);
+            font-size:13px;
+            display:flex;
+            gap:10px;
+            align-items:flex-start;
+        }
+        .feature b{color:white; font-weight:600}
+
+        footer{
+            margin-top:22px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:10px;
+            color:var(--muted);
+            font-size:13px;
+        }
+
+        .badge{
+            display:inline-flex;
+            gap:8px;
+            align-items:center;
+            background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+            border-radius:10px;
+            padding:6px 8px;
+            border:1px solid rgba(255,255,255,0.02);
+            font-weight:600;
+        }
+
+        code{background: rgba(0,0,0,0.18); padding:6px 8px; border-radius:8px; font-size:13px; color:#fff; display:inline-block}
+
+        /* responsive */
+        @media (max-width:880px){
+            .grid{grid-template-columns: 1fr; }
+            .card-aside{order:2}
+        }
+    </style>
+</head>
+<body>
+<main class="card" role="main" aria-labelledby="headline">
+    <header>
+        <div class="logo" aria-hidden="true">H</div>
+        <div>
+            <h1 id="headline">Haddaji’s HTTP Server</h1>
+            <p class="lead">A tiny, handcrafted HTTP server — built for learning and demos. Smooth, minimal, and open to the web.</p>
+        </div>
+    </header>
+
+    <div class="grid">
+        <section class="hero" aria-labelledby="hero-title">
+            <h2 id="hero-title" style="margin:0 0 6px 0">Welcome 👋</h2>
+            <p style="margin:0;color:var(--muted)">This page is served directly by <strong>Haddaji’s HTTP Server</strong>. It demonstrates a clean HTML/CSS webroot that you can extend — add files to the webroot and your server will serve them.</p>
+
+            <div class="cta-row">
+                <button class="btn" onclick="showInfo()">Server Info</button>
+            </div>
+
+            <div class="features" style="margin-top:18px">
+                <div class="feature"><div style="width:10px;height:10px;border-radius:4px;background:linear-gradient(90deg,var(--accent-a),var(--accent-b))"></div>
+                    <div><b>Static files</b><div style="color:var(--muted)">Serve HTML, CSS, JS, images from your webroot</div></div>
+                </div>
+
+                <div class="feature"><div style="width:10px;height:10px;border-radius:4px;background:#00b894"></div>
+                    <div><b>Lightweight</b><div style="color:var(--muted)">Small code, easy to inspect and extend</div></div>
+                </div>
+
+                <div class="feature"><div style="width:10px;height:10px;border-radius:4px;background:#fdcb6e"></div>
+                    <div><b>Educational</b><div style="color:var(--muted)">Perfect for learning sockets, parsing, and HTTP basics</div></div>
+                </div>
+
+                <div class="feature"><div style="width:10px;height:10px;border-radius:4px;background:#e17055"></div>
+                    <div><b>Modern style</b><div style="color:var(--muted)">Responsive, accessible, and minimalist UI</div></div>
+                </div>
+            </div>
+
+            <div style="margin-top:18px">
+                <pre style="background:rgba(0,0,0,0.18);padding:10px;border-radius:10px;color:#fff;font-size:13px">Example: <code>GET /index.html HTTP/1.1</code></pre>
+            </div>
+        </section>
+
+        <aside class="card-aside" aria-labelledby="aside-title">
+            <div class="meta">
+                <div class="badge">Haddaji</div>
+                <div style="flex:1"></div>
+                <div style="text-align:right;color:var(--muted)">Status: <strong id="serverStatus">Online</strong></div>
+            </div>
+
+            <div style="display:flex;gap:12px;margin-bottom:12px">
+                <div class="stat"><div class="n" id="portNum">8080</div><div class="t">Port</div></div>
+                <div class="stat"><div class="n" id="reqCount">0</div><div class="t">Requests</div></div>
+                <div class="stat"><div class="n" id="uptime">0s</div><div class="t">Uptime</div></div>
+            </div>
+
+            <div style="color:var(--muted);font-size:13px">Quick tips:</div>
+            <ul style="color:var(--muted);padding-left:18px;margin-top:8px">
+                <li>Place files in your server webroot (e.g. <code>index.html</code>).</li>
+                <li>Open <code>http://localhost:8080</code> to view this page.</li>
+                <li>Use the server logs for debugging (SLF4J + Logback).</li>
+            </ul>
+
+            <div style="margin-top:12px">
+                <button class="btn" onclick="clearCounts()">Reset</button>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <div>Served with ♥ by <strong>Haddaji’s HTTP Server</strong></div>
+        <div style="opacity:.9">Built for learning • <span id="now"></span></div>
+    </footer>
+</main>
+
+<script>
+
+    let start = Date.now();
+    let requests = 0;
+
+    const portEl = document.getElementById('portNum');
+    const reqEl = document.getElementById('reqCount');
+    const uptimeEl = document.getElementById('uptime');
+    const nowEl = document.getElementById('now');
+    const statusEl = document.getElementById('serverStatus');
+
+    function tick() {
+        const elapsed = Math.floor((Date.now() - start) / 1000);
+        uptimeEl.textContent = elapsed + 's';
+        nowEl.textContent = new Date().toLocaleString();
+    }
+    setInterval(tick, 1000);
+    tick();
+
+    function showInfo(){
+        requests++;
+        reqEl.textContent = requests;
+        alert('Server: Haddaji\\s HTTP Server\\nPort: ' + portEl.textContent + '\\nRequests: ' + requests);
+    }
+
+    function clearCounts(){
+        requests = 0;
+        reqEl.textContent = requests;
+    }
+
+</script>
+</body>
+</html>
